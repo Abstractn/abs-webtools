@@ -26,8 +26,9 @@ export class RandomInt implements AbsComponent {
   private setCopyInputEvent(): void {
     this.outputInputNode.addEventListener('click', (event) => {
       const value = this.outputInputNode.value;
-      const clipboard = new Clipboard();
-      clipboard.writeText(value);
+      this.outputInputNode.select();
+      this.outputInputNode.setSelectionRange(0, 99999);
+      navigator.clipboard.writeText(value);
     });
   }
 
