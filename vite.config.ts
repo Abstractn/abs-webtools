@@ -1,5 +1,5 @@
 export default {
-  base: '/tools/dist/',
+  base: '/abs-webtools/dist/',
   build: {
     minify: 'terser',
     terserOptions: {
