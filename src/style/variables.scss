@@ -1,0 +1,7 @@
+:root {
+  --page-spacing: 60px;
+
+  @include breakpoint(mob-down) {
+    --page-spacing: 30px;
+  }
+}
