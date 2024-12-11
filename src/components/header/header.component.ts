@@ -29,12 +29,12 @@ export class Header implements AbsComponent {
 
   private buildHeaderList() {
     this.viewNodeList?.sort((a, b) => {
-      const aTitle = (a.getAttribute('data-title') as String).toLowerCase();
-      const bTitle = (b.getAttribute('data-title') as String).toLowerCase();
+      const aTitle = (a.getAttribute('data-title') as string).toLowerCase();
+      const bTitle = (b.getAttribute('data-title') as string).toLowerCase();
       return aTitle.localeCompare(bTitle);
     }).forEach(viewNode => {
-      const viewNodeId = viewNode.getAttribute('id');
-      const viewNodeTitle = viewNode.getAttribute('data-title');
+      const viewNodeId = viewNode.getAttribute('id') as string;
+      const viewNodeTitle = viewNode.getAttribute('data-title') as string;
 
       const templateData = {
         targetId: viewNodeId,
@@ -71,6 +71,7 @@ export class Header implements AbsComponent {
   
             viewDesktopButtonNode.classList.add(this.BUTTON_ACTIVE_CLASS);
             viewMobileButtonNode.classList.add(this.BUTTON_ACTIVE_CLASS);
+            queryParam.set(this.VIEW_QUERYPARAM, viewNodeId);
           }
         });
       });
@@ -81,13 +82,20 @@ export class Header implements AbsComponent {
   }
 
   private preselectHeaderItem() {
-    const preselectedView = queryParam.get('view');
-    if(preselectedView) {
-      
+    const preselectedViewId = queryParam.get('view');
+    if(preselectedViewId) {
+      const preselectedViewNode = this.viewNodeList.find(viewNode => viewNode.getAttribute('id') === preselectedViewId);
+      const preselectedViewDesktopButtonNode = this.headerDesktopListNode.getNode(`button[data-target-id="${preselectedViewId}"]`);
+      const preselectedViewMobileButtonNode = this.headerMobileListNode.getNode(`button[data-target-id="${preselectedViewId}"]`);;
+      preselectedViewNode && preselectedViewNode.classList.add(this.VIEW_VISIBLE_CLASS);
+      preselectedViewDesktopButtonNode && preselectedViewDesktopButtonNode.classList.add(this.BUTTON_ACTIVE_CLASS);
+      preselectedViewMobileButtonNode && preselectedViewMobileButtonNode.classList.add(this.BUTTON_ACTIVE_CLASS);
     } else {
       this.viewNodeList[0].classList.add(this.VIEW_VISIBLE_CLASS);
       this.headerDesktopButtonNodeList[0].classList.add(this.BUTTON_ACTIVE_CLASS);
       this.headerMobileButtonNodeList[0].classList.add(this.BUTTON_ACTIVE_CLASS);
+      const viewId = this.viewNodeList[0].getAttribute('id') as string;
+      queryParam.set(this.VIEW_QUERYPARAM, viewId);
     }
   }
 }
