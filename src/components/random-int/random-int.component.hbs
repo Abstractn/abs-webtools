@@ -2,12 +2,12 @@
   <div class="inputs-wrapper">
     <fieldset>
       <legend>range</legend>
-      {{> components/atoms/input/input-number.atom
+      {{> components/atoms/input-number/input-number.atom
         initialValue="0"
         inputAttributes="js-min"
         controls=true
       }}
-      {{> components/atoms/input/input-number.atom
+      {{> components/atoms/input-number/input-number.atom
         initialValue="1"
         inputAttributes="js-max"
         controls=true
@@ -15,5 +15,7 @@
     </fieldset>
   </div>
   <button class="button" js-generate>GENERATE</button>
-  <input class="input" type="text" js-generate-output />
+  {{> components/atoms/input-text/input-text.atom
+    inputAttributes="js-generate-output"
+  }}
 </view>

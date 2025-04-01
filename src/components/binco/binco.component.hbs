@@ -1,3 +1,16 @@
 <view id="binco" cmp="Binco" data-title="BinCo">
-  (binco component)
+  {{!-- (binco component) --}}
+  <div class="inputs-wrapper">
+    <fieldset>
+      <legend>text</legend>
+      {{> components/atoms/input-area/input-area.atom }}
+    </fieldset>
+  </div>
+  <button class="button" js-____>CONVERT</button>
+  <div class="inputs-wrapper">
+    <fieldset>
+      <legend>code</legend>
+      {{> components/atoms/input-area/input-area.atom }}
+    </fieldset>
+  </div>
 </view>

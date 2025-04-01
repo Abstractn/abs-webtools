@@ -4,7 +4,9 @@
   input {
     width: 100%;
     color: white;
+    font-family: 'Montserrat';
     font-size: 1.2rem;
+    font-weight: 200;
     background-color: transparent;
     padding: 8px 10px;
     padding-right: 24px;
@@ -44,7 +46,7 @@
       border-radius: 2px;
       padding: var(--padding);
       position: absolute;
-      right: 4px;
+      right: 2px;
       width: calc(var(--size) + (var(--padding) * 2));
       height: calc(var(--size) + (var(--padding) * 2));
       transition: var(--transition-duration);
