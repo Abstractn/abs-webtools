@@ -1,9 +1,48 @@
 <view id="proportional-range" cmp="ProportionalRange" data-title="Proportional Range">
-  <input type="number" value="0" js-old-min />
+  <div class="inputs-wrapper">
+    <fieldset>
+      <legend>initial range</legend>
+      {{> components/atoms/input/input-number.atom
+        initialValue="0"
+        inputAttributes="js-old-min"
+        controls=true
+      }}
+      {{> components/atoms/input/input-number.atom
+        initialValue="100"
+        inputAttributes="js-old-max"
+        controls=true
+      }}
+    </fieldset>
+    <fieldset>
+      <legend>new range</legend>
+      {{> components/atoms/input/input-number.atom
+        initialValue="0"
+        inputAttributes="js-new-min"
+        controls=true
+      }}
+      {{> components/atoms/input/input-number.atom
+        initialValue="1"
+        inputAttributes="js-new-max"
+        controls=true
+      }}
+    </fieldset>
+    <fieldset>
+      <legend>value</legend>
+      {{> components/atoms/input/input-number.atom
+        initialValue="1"
+        inputAttributes="js-value"
+        controls=true
+      }}
+    </fieldset>
+  </div>
+
+
+
+  {{!-- <input type="number" value="0" js-old-min />
   <input type="number" value="100" js-old-max />
   <input type="number" value="0" js-new-min />
   <input type="number" value="1" js-new-max />
-  <input type="number" value="1" js-value></div>
-  <button js-calculate>CALCULATE</button>
-  <input type="text" js-calculation-output />
+  <input type="number" value="1" js-value></div> --}}
+  <button class="button" js-calculate>CALCULATE</button>
+  <input class="input" type="text" js-calculation-output />
 </view>

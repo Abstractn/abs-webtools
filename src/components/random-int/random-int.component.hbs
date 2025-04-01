@@ -1,6 +1,19 @@
 <view id="random-int" cmp="RandomInt" data-title="Random Int">
-  <input type="number" value="0" js-min />
-  <input type="number" value="1" js-max />
-  <button js-generate>GENERATE</button>
-  <input type="text" js-generate-output />
+  <div class="inputs-wrapper">
+    <fieldset>
+      <legend>range</legend>
+      {{> components/atoms/input/input-number.atom
+        initialValue="0"
+        inputAttributes="js-min"
+        controls=true
+      }}
+      {{> components/atoms/input/input-number.atom
+        initialValue="1"
+        inputAttributes="js-max"
+        controls=true
+      }}
+    </fieldset>
+  </div>
+  <button class="button" js-generate>GENERATE</button>
+  <input class="input" type="text" js-generate-output />
 </view>

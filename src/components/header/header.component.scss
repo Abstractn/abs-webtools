@@ -16,26 +16,16 @@
   }
 
   .header-list {
-    display: flex;
     align-items: center;
     gap: 20px;
 
-    &.header-list-dsk {
-      display: flex;
+    &.-dsk {
+      --display: flex;
       margin-left: 60px;
-  
-      @include breakpoint(tab-down) {
-        display: none;
-      }
     }
   
-    &.header-list-mob {
-      display: none;
+    &.-mob {
       flex-direction: column;
-      
-      @include breakpoint(tab-down) {
-        display: flex;
-      }
     }
   }
 

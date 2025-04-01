@@ -1,12 +1,12 @@
 import { AbsComponent } from 'abs-component';
-import { AbsTemplate, AbsTemplatePrintMethod } from '../../new-abs-template';
+import { AbsTemplate, AbsTemplateBracketType, AbsTemplatePrintMethod } from '../../../../abs-template/src/abs-template';
 import { queryParam } from '../../script/utils';
 
 export class Header implements AbsComponent {
   constructor(public readonly node: HTMLElement) {
     this.headerListItemTemplateNode = this.node.getNode('template#header-list-item') as HTMLElement;
-    this.headerDesktopListNode = this.node.getNode('.header-list-dsk') as HTMLElement;
-    this.headerMobileListNode = this.node.getNode('.header-list-mob') as HTMLElement;
+    this.headerDesktopListNode = this.node.getNode('.header-list.-dsk') as HTMLElement;
+    this.headerMobileListNode = this.node.getNode('.header-list.-mob') as HTMLElement;
     this.viewNodeList = document.getNodes('main view') as HTMLElement[];
   }
 
@@ -46,12 +46,14 @@ export class Header implements AbsComponent {
         printTargetNode: this.headerDesktopListNode,
         templateData: templateData,
         printMethod: AbsTemplatePrintMethod.BEFORE_END,
+        bracketType: AbsTemplateBracketType.SQUARE,
       });
       AbsTemplate.build({
         templateNode: this.headerListItemTemplateNode,
         printTargetNode: this.headerMobileListNode,
         templateData: templateData,
         printMethod: AbsTemplatePrintMethod.BEFORE_END,
+        bracketType: AbsTemplateBracketType.SQUARE,
       });
 
       const viewDesktopButtonNode = this.headerDesktopListNode.getNode(`button[data-target-id="${viewNodeId}"]`) as HTMLButtonElement;

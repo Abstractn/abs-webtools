@@ -1,0 +1,22 @@
+.button {
+  color: white;
+  font-size: 1.2rem;
+  background-color: rgba(0, 0, 0, .4);
+  padding: 8px 16px;
+  border: solid white 1px;
+  border-radius: 0;
+  transition: var(--transition-duration);
+
+  &:active {
+    background-color: rgba(0, 0, 0, .6);
+  }
+
+  &:not(:disabled) {
+    cursor: pointer;
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: 0px 0px 4px white;
+  }
+}

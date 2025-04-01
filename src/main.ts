@@ -3,6 +3,8 @@ import './main.scss';
 import { AbsComponentManager } from 'abs-component';
 import { absPolyfill } from 'abs-utilities';
 
+import { InputNumber } from './components/atoms/input/input-number.atom.ts';
+
 import { AniCalc } from './components/ani-calc/ani-calc.component.ts';
 import { Binco } from './components/binco/binco.component.ts';
 import { Header } from './components/header/header.component.ts';
@@ -17,6 +19,8 @@ export const absComponentManager = new AbsComponentManager({
 });
 
 [
+  InputNumber,
+
   AniCalc,
   Binco,
   Header,
