@@ -14,7 +14,11 @@
       }}
     </fieldset>
   </div>
-  <button class="button" js-generate>GENERATE</button>
+  {{> components/atoms/button/button.atom
+    type="secondary"
+    label="GENERATE"
+    attributes="js-generate"
+  }}
   {{> components/atoms/input-text/input-text.atom
     inputAttributes="js-generate-output"
   }}

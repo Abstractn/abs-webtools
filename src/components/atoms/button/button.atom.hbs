@@ -1,6 +1,6 @@
 {{#if url}}
   <a
-    class="button {{classes}} {{#if reverseIcon}}icon-reverse{{/if}}"
+    class="button button-{{type}} {{#if reverseIcon}}icon-reverse{{/if}} {{classes}}"
     {{#if attributes}}{{attributes}}{{/if}}
     href="{{url}}"
     {{#if urlTarget}}target="{{urlTarget}}"{{/if}}
@@ -18,7 +18,7 @@
   </a>
 {{else}}
   <button
-    class="button {{classes}} {{#if reverseIcon}}icon-reverse{{/if}}"
+    class="button button-{{type}} {{#if reverseIcon}}icon-reverse{{/if}} {{classes}}"
     {{#if attributes}}{{attributes}}{{/if}}
   >
     {{#if icon}}
