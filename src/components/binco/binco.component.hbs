@@ -3,14 +3,32 @@
   <div class="inputs-wrapper">
     <fieldset>
       <legend>text</legend>
-      {{> components/atoms/input-area/input-area.atom }}
+      {{> components/atoms/input-area/input-area.atom
+        inputAttributes="js-text"
+      }}
     </fieldset>
   </div>
-  <button class="button" js-____>CONVERT</button>
+  <div class="buttons-container">
+    {{!-- <button class="button" js-encode>ENCODE</button>
+    <button class="button" js-decode>DECODE</button> --}}
+    {{> components/atoms/button/button.atom
+      label="ENCODE"
+      icon="chevron-down"
+      attributes="js-encode"
+      reverseIcon="true"
+    }}
+    {{> components/atoms/button/button.atom
+      label="DECODE"
+      icon="chevron-up"
+      attributes="js-decode"
+    }}
+  </div>
   <div class="inputs-wrapper">
     <fieldset>
       <legend>code</legend>
-      {{> components/atoms/input-area/input-area.atom }}
+      {{> components/atoms/input-area/input-area.atom
+        inputAttributes="js-code"
+      }}
     </fieldset>
   </div>
 </view>
