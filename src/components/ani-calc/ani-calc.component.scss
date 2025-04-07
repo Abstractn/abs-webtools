@@ -28,5 +28,10 @@
     >*:not(legend) {
       width: 100%;
     }
+
+    &.disabled {
+      opacity: .4;
+      pointer-events: none;
+    }
   }
 }

@@ -14,6 +14,22 @@
         controls="true"
       }}
     </fieldset>
+    <fieldset class="disabled">
+      <legend>release frequency (days)</legend>
+      {{> components/atoms/input-number/input-number.atom
+        inputAttributes="js-release-frequency disabled"
+        initialValue="7"
+        controls="true"
+      }}
+    </fieldset>
+    <fieldset class="disabled">
+      <legend>watch frequency (per day)</legend>
+      {{> components/atoms/input-number/input-number.atom
+        inputAttributes="js-watch-frequency disabled"
+        initialValue="1"
+        controls="true"
+      }}
+    </fieldset>
   </div>
 
   {{> components/atoms/button/button.atom
