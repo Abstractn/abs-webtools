@@ -12,6 +12,7 @@
     "abs-component": "^1.2.1",
     "abs-template": "^1.2.0",
     "abs-utilities": "^1.0.2",
+    "dayjs": "^1.11.13",
     "path": "^0.12.7",
     "sass": "^1.77.8",
     "terser": "^5.33.0",
