@@ -35,14 +35,6 @@
       }}
     </fieldset>
   </div>
-
-
-
-  {{!-- <input type="number" value="0" js-old-min />
-  <input type="number" value="100" js-old-max />
-  <input type="number" value="0" js-new-min />
-  <input type="number" value="1" js-new-max />
-  <input type="number" value="1" js-value></div> --}}
   
   {{> components/atoms/button/button.atom
     type="secondary"
@@ -50,8 +42,7 @@
     attributes="js-calculate"
   }}
 
-  {{!-- <input class="input" type="text" js-calculation-output /> --}}
   {{> components/atoms/input-text/input-text.atom
-    inputAttributes="js-calculation-output"
+    inputAttributes="js-calculation-output readonly"
   }}
 </view>

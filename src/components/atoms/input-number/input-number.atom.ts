@@ -45,7 +45,6 @@ export class InputNumber implements AbsComponent {
       const newParsedValue = parseInt(this.inputNode.value);
 
       const isPastMax = Boolean(this.max !== null && newParsedValue >= this.max);
-      console.log(`inc ${isPastMax}`);
       isPastMax && this.increaseButtonNode?.setAttribute('disabled', 'true');
       this.decreaseButtonNode?.removeAttribute('disabled');
     });
