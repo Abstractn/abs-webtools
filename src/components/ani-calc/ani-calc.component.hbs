@@ -1,3 +1,39 @@
 <view id="ani-calc" cmp="AniCalc" data-title="AniCalc">
-  (anicalc component)
+  <div class="inputs-wrapper">
+    <fieldset>
+      <legend>airing start date</legend>
+      {{> components/atoms/input-date/input-date.atom
+        inputAttributes="js-start"
+      }}
+    </fieldset>
+    <fieldset>
+      <legend>number of episodes</legend>
+      {{> components/atoms/input-number/input-number.atom
+        inputAttributes="js-duration"
+        initialValue="12"
+        controls="true"
+      }}
+    </fieldset>
+  </div>
+
+  {{> components/atoms/button/button.atom
+    type="secondary"
+    label="CALCULATE"
+    attributes="js-calculate"
+  }}
+
+  <div class="inputs-wrapper">
+    <fieldset>
+      <legend>begin</legend>
+      {{> components/atoms/input-text/input-text.atom
+        inputAttributes="js-result readonly"
+      }}
+    </fieldset>
+    <fieldset>
+      <legend>estimated end date</legend>
+      {{> components/atoms/input-text/input-text.atom
+        inputAttributes="js-end readonly"
+      }}
+    </fieldset>
+  </div>
 </view>

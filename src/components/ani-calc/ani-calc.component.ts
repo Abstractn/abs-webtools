@@ -1,101 +1,69 @@
 import { AbsComponent } from 'abs-component';
+import Dayjs from 'dayjs';
+
+interface AniCalcResult {
+  endDate: Dayjs.Dayjs,
+  watchDate: Dayjs.Dayjs,
+}
 
 export class AniCalc implements AbsComponent {
-  constructor(public readonly node: HTMLElement) {}
+  constructor(public readonly node: HTMLElement) {
+    this.startDateInputNode = this.node.getNode('[js-start]') as HTMLInputElement;
+    this.durationInputNode = this.node.getNode('[js-duration]') as HTMLInputElement;
+    this.releaseFrequencyInputNode = this.node.getNode('[js-release-frequency]') as HTMLInputElement;
+    this.watchFrequencyInputNode = this.node.getNode('[js-watch-frequency]') as HTMLInputElement;
+    this.watchDateInputNode = this.node.getNode('[js-result]') as HTMLInputElement;
+    this.endDateInputNode = this.node.getNode('[js-end]') as HTMLInputElement;
+    this.calculateButtonNode = this.node.getNode('[js-calculate]') as HTMLButtonElement;
+  }
 
-  init() {}
+  private readonly ERROR_LABEL: string = 'Error';
+
+  private readonly startDateInputNode: HTMLInputElement;
+  private readonly durationInputNode: HTMLInputElement;
+  private readonly releaseFrequencyInputNode: HTMLInputElement;
+  private readonly watchFrequencyInputNode: HTMLInputElement;
+  private readonly watchDateInputNode: HTMLInputElement;
+  private readonly endDateInputNode: HTMLInputElement;
+  private readonly calculateButtonNode: HTMLButtonElement;
+
+  private calculate(startDate: Dayjs.Dayjs, duration: number): AniCalcResult | null {
+    const isValid = (
+      startDate.toString() != 'Invalid Date' &&
+      duration > 0
+    );
+    if (isValid) {
+      const endDate = Dayjs(startDate).add(duration - 1, 'week');
+      const watchDate = endDate.subtract(duration - 1, 'day');
+      return {
+        endDate: endDate,
+        watchDate: watchDate,
+      };
+    } else {
+      return null;
+    }
+  }
+
+  private setEvents() {
+    this.calculateButtonNode.addEventListener('click', () => {
+      const startDate = Dayjs(this.startDateInputNode.value);
+      const duration = parseInt(this.durationInputNode.value);
+      const res = this.calculate(startDate, duration);
+      if(res) {
+        //this.watchDateInputNode.value = res.watchDate.locale(navigator.language).format('MMMM DD');
+        //this.endDateInputNode.value = res.endDate.locale(navigator.language).format('MMMM DD');
+        this.watchDateInputNode.value = res.watchDate.format('MMMM DD');
+        this.endDateInputNode.value = res.endDate.format('MMMM DD');
+      } else {
+        this.watchDateInputNode.value = this.ERROR_LABEL;
+        this.endDateInputNode.value = '';
+      }
+    });
+  }
+
+  init() {
+    this.setEvents();
+  }
+
   ready() {}
 }
-
-/*
-const config = {
-  submitButtonNodeSelector: '[name="button-submit"]',
-  submitButtonNode: null,
-  startDateInputNode: null,
-  startDateInputNodeSelector: '[name="input--start-date"]',
-  durationInputNode: null,
-  durationInputNodeSelector: '[name="input--duration"]',
-  //alreadyAiredInputNode: null,
-  //alreadyAiredInputNodeSelector: '[name="input--already-aired"]',
-  watchStartDateOutputNode: null,
-  watchStartDateOutputNodeSelector: '[name="output--watch"]',
-  estimateEndDateOutputNode: null,
-  estimateEndDateOutputNodeSelector: '[name="output--estimate"]',
-  dataStorageKey: 'abs.anicalc.storedInputs',
-};
-const data = {
-  startDate: null,
-  duration: null,
-  //alreadyAired: null
-  watchStart: null,
-  estimateEndDate: null,
-};
-
-function setNodesReferences() {
-  config.submitButtonNode = document.querySelector(config.submitButtonNodeSelector);
-  config.startDateInputNode = document.querySelector(config.startDateInputNodeSelector);
-  config.durationInputNode = document.querySelector(config.durationInputNodeSelector);
-  //config.alreadyAiredInputNode = document.querySelector(config.alreadyAiredInputNodeSelector);
-  config.watchStartDateOutputNode = document.querySelector(config.watchStartDateOutputNodeSelector);
-  config.estimateEndDateOutputNode = document.querySelector(config.estimateEndDateOutputNodeSelector);
-}
-
-function assignEvent() {
-  config.submitButtonNode.addEventListener('click', (event) => {
-    getData();
-    storeData();
-    calculateStart();
-  });
-}
-
-function getData() {
-  data.startDate = new Date(config.startDateInputNode.value);
-  data.duration = config.durationInputNode.value * 1;
-  //data.alreadyAired = config.alreadyAiredInputNode.value * 1;
-}
-
-function calculateStart() {
-  const isValid = (
-    data.startDate != 'Invalid Date' &&
-    data.duration > 0
-  );
-  if (isValid) {
-    //const endDate = dayjs(data.startDate).add(data.duration*7, 'day');
-    //const resultDate = endDate.subtract(data.duration, 'day');
-    const endDate = dayjs(data.startDate).add(data.duration - 1, 'week');
-    const resultDate = endDate.subtract(data.duration - 1, 'day');
-    config.watchStartDateOutputNode.value = resultDate.locale(navigator.language).format('MMMM DD');
-    config.estimateEndDateOutputNode.value = endDate.locale(navigator.language).format('MMMM DD');
-  } else {
-    config.watchStartDateOutputNode.value = 'Error';
-    config.estimateEndDateOutputNode.value = '';
-  }
-}
-
-function storeData() {
-  const storageData = {
-    date: data.startDate,
-    watchLength: data.duration,
-  };
-  localStorage.setItem(config.dataStorageKey, JSON.stringify(storageData));
-}
-
-function loadData() {
-  const storedData = JSON.parse(localStorage.getItem(config.dataStorageKey));
-  if (storedData) {
-    config.startDateInputNode.value = dayjs(storedData.date).format('YYYY-MM-DD');
-    config.durationInputNode.value = storedData.watchLength;
-    data.startDate = storedData.date;
-    data.duration = storedData.watchLength;
-    calculateStart();
-  }
-}
-
-function init() {
-  setNodesReferences();
-  assignEvent();
-  loadData();
-}
-
-document.addEventListener('DOMContentLoaded', init);
-*/
