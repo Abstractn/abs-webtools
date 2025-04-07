@@ -6,6 +6,7 @@ import { absPolyfill } from 'abs-utilities';
 import { InputText } from './components/atoms/input-text/input-text.atom.ts';
 import { InputNumber } from './components/atoms/input-number/input-number.atom.ts';
 import { InputArea } from './components/atoms/input-area/input-area.atom.ts';
+import { InputDate } from './components/atoms/input-date/input-date.atom.ts';
 
 import { AniCalc } from './components/ani-calc/ani-calc.component.ts';
 import { Binco } from './components/binco/binco.component.ts';
@@ -24,6 +25,7 @@ export const absComponentManager = new AbsComponentManager({
   InputText,
   InputNumber,
   InputArea,
+  InputDate,
 
   AniCalc,
   Binco,
