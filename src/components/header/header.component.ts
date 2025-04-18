@@ -1,6 +1,7 @@
 import { AbsComponent } from 'abs-component';
 import { AbsTemplate, AbsTemplatePrintMethod, AbsTemplateBracketType } from 'abs-template';
 import { queryParam } from '../../script/utils';
+import * as Anime from 'animejs';
 
 export class Header implements AbsComponent {
   constructor(public readonly node: HTMLElement) {
@@ -65,6 +66,26 @@ export class Header implements AbsComponent {
           const previousActiveDesktopButtonNode = this.headerDesktopListNode.getNode('button.active');
           const previousActiveMobileButtonNode = this.headerMobileListNode.getNode('button.active');
           if(viewNode !== previousVisibleView) {
+            if(previousVisibleView) {
+              const previousViewNodeIndex = document.getNodes('main view')?.findIndex(vn => vn == previousVisibleView);
+              const currentViewNodeIndex = document.getNodes('main view')?.findIndex(vn => vn == viewNode);
+              if(
+                currentViewNodeIndex !== undefined &&
+                currentViewNodeIndex !== -1 &&
+                previousViewNodeIndex !== undefined &&
+                previousViewNodeIndex !== -1
+              ) {
+                const isCurrentBefore = currentViewNodeIndex < previousViewNodeIndex;
+                
+                Anime.animate(viewNode, {
+                  translateX: [isCurrentBefore ? -100 : 100, 0],
+                  opacity: [0, 1],
+
+                  duration: 400,
+                  ease: Anime.eases.out(4),
+                });
+              }
+            }
             previousVisibleView && previousVisibleView.classList.remove(this.VIEW_VISIBLE_CLASS);
             viewNode.classList.add(this.VIEW_VISIBLE_CLASS);
   
@@ -73,6 +94,7 @@ export class Header implements AbsComponent {
   
             viewDesktopButtonNode.classList.add(this.BUTTON_ACTIVE_CLASS);
             viewMobileButtonNode.classList.add(this.BUTTON_ACTIVE_CLASS);
+
             queryParam.set(this.VIEW_QUERYPARAM, viewNodeId);
           }
         });
