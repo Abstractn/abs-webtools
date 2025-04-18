@@ -1,5 +1,5 @@
 import { AbsComponent } from 'abs-component';
-import { AbsTemplate, AbsTemplateBracketType, AbsTemplatePrintMethod } from '../../../../abs-template/src/abs-template';
+import { AbsTemplate, AbsTemplatePrintMethod, AbsTemplateBracketType } from 'abs-template';
 import { queryParam } from '../../script/utils';
 
 export class Header implements AbsComponent {
