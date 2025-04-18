@@ -28,6 +28,53 @@ export class Header implements AbsComponent {
     this.preselectHeaderItem();
   }
 
+  private assignEvents(viewNode: HTMLElement) {
+    const viewNodeId = viewNode.getAttribute('id') as string;
+
+    const viewDesktopButtonNode = this.headerDesktopListNode.getNode(`button[data-target-id="${viewNodeId}"]`) as HTMLButtonElement;
+    const viewMobileButtonNode = this.headerMobileListNode.getNode(`button[data-target-id="${viewNodeId}"]`) as HTMLButtonElement;
+
+    [viewDesktopButtonNode, viewMobileButtonNode].forEach(viewButtonNode => {
+      viewButtonNode.addEventListener('click', (event) => {
+        const previousVisibleView = document.getNode('main view.visible');
+        const previousActiveDesktopButtonNode = this.headerDesktopListNode.getNode('button.active');
+        const previousActiveMobileButtonNode = this.headerMobileListNode.getNode('button.active');
+        if(viewNode !== previousVisibleView) {
+          if(previousVisibleView) {
+            const previousViewNodeIndex = document.getNodes('main view')?.findIndex(vn => vn == previousVisibleView);
+            const currentViewNodeIndex = document.getNodes('main view')?.findIndex(vn => vn == viewNode);
+            if(
+              currentViewNodeIndex !== undefined &&
+              currentViewNodeIndex !== -1 &&
+              previousViewNodeIndex !== undefined &&
+              previousViewNodeIndex !== -1
+            ) {
+              const isCurrentBefore = currentViewNodeIndex < previousViewNodeIndex;
+              
+              Anime.animate(viewNode, {
+                translateX: [isCurrentBefore ? -100 : 100, 0],
+                opacity: [0, 1],
+
+                duration: 400,
+                ease: Anime.eases.out(4),
+              });
+            }
+          }
+          previousVisibleView && previousVisibleView.classList.remove(this.VIEW_VISIBLE_CLASS);
+          viewNode.classList.add(this.VIEW_VISIBLE_CLASS);
+
+          previousActiveDesktopButtonNode && previousActiveDesktopButtonNode.classList.remove(this.BUTTON_ACTIVE_CLASS);
+          previousActiveMobileButtonNode && previousActiveMobileButtonNode.classList.remove(this.BUTTON_ACTIVE_CLASS);
+
+          viewDesktopButtonNode.classList.add(this.BUTTON_ACTIVE_CLASS);
+          viewMobileButtonNode.classList.add(this.BUTTON_ACTIVE_CLASS);
+
+          queryParam.set(this.VIEW_QUERYPARAM, viewNodeId);
+        }
+      });
+    });
+  }
+
   private buildHeaderList() {
     this.viewNodeList?.sort((a, b) => {
       const aTitle = (a.getAttribute('data-title') as string).toLowerCase();
@@ -57,48 +104,7 @@ export class Header implements AbsComponent {
         bracketType: AbsTemplateBracketType.SQUARE,
       });
 
-      const viewDesktopButtonNode = this.headerDesktopListNode.getNode(`button[data-target-id="${viewNodeId}"]`) as HTMLButtonElement;
-      const viewMobileButtonNode = this.headerMobileListNode.getNode(`button[data-target-id="${viewNodeId}"]`) as HTMLButtonElement;
-
-      [viewDesktopButtonNode, viewMobileButtonNode].forEach(viewButtonNode => {
-        viewButtonNode.addEventListener('click', (event) => {
-          const previousVisibleView = document.getNode('main view.visible');
-          const previousActiveDesktopButtonNode = this.headerDesktopListNode.getNode('button.active');
-          const previousActiveMobileButtonNode = this.headerMobileListNode.getNode('button.active');
-          if(viewNode !== previousVisibleView) {
-            if(previousVisibleView) {
-              const previousViewNodeIndex = document.getNodes('main view')?.findIndex(vn => vn == previousVisibleView);
-              const currentViewNodeIndex = document.getNodes('main view')?.findIndex(vn => vn == viewNode);
-              if(
-                currentViewNodeIndex !== undefined &&
-                currentViewNodeIndex !== -1 &&
-                previousViewNodeIndex !== undefined &&
-                previousViewNodeIndex !== -1
-              ) {
-                const isCurrentBefore = currentViewNodeIndex < previousViewNodeIndex;
-                
-                Anime.animate(viewNode, {
-                  translateX: [isCurrentBefore ? -100 : 100, 0],
-                  opacity: [0, 1],
-
-                  duration: 400,
-                  ease: Anime.eases.out(4),
-                });
-              }
-            }
-            previousVisibleView && previousVisibleView.classList.remove(this.VIEW_VISIBLE_CLASS);
-            viewNode.classList.add(this.VIEW_VISIBLE_CLASS);
-  
-            previousActiveDesktopButtonNode && previousActiveDesktopButtonNode.classList.remove(this.BUTTON_ACTIVE_CLASS);
-            previousActiveMobileButtonNode && previousActiveMobileButtonNode.classList.remove(this.BUTTON_ACTIVE_CLASS);
-  
-            viewDesktopButtonNode.classList.add(this.BUTTON_ACTIVE_CLASS);
-            viewMobileButtonNode.classList.add(this.BUTTON_ACTIVE_CLASS);
-
-            queryParam.set(this.VIEW_QUERYPARAM, viewNodeId);
-          }
-        });
-      });
+      this.assignEvents(viewNode);
     });
 
     this.headerDesktopButtonNodeList = this.headerDesktopListNode.getNodes('button') as HTMLButtonElement[];
