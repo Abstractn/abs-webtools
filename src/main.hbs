@@ -1,22 +1,2 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <script id="redirect-guard">
-      (() => {
-        const originPathName = '/abs-webtools/';
-        const targetPathName = '/abs-webtools/dist/';
-        const currentPathName = window.location.pathname;
-        if(currentPathName === originPathName) {
-          window.location = targetPathName;
-        }
-      })();
-    </script>
-
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="" /> <!-- TODO icon -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Abs WebTools</title>
-  </head>
-  {{> components/page/page.component }}
-  <script type="module" src="/src/main.ts"></script>
-</html>
+{{> components/page/page.component }}
+<script type="module" src="/src/main.ts"></script>
