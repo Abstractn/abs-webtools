@@ -1,7 +1,9 @@
 import './main.scss';
 
 import { AbsComponentManager } from 'abs-component';
-import { absPolyfill } from 'abs-utilities';
+//import { absPolyfill } from 'abs-utilities';
+//FIXME abs-utils v1.3 is not released yet
+import { absPolyfill } from '../../abs-utils/src/abs-utils.ts';
 
 import { InputText } from './components/atoms/input-text/input-text.atom.ts';
 import { InputNumber } from './components/atoms/input-number/input-number.atom.ts';

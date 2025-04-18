@@ -8,12 +8,16 @@ export class Header implements AbsComponent {
     this.headerListItemTemplateNode = this.node.getNode('template#header-list-item') as HTMLElement;
     this.headerDesktopListNode = this.node.getNode('.header-list.-dsk') as HTMLElement;
     this.headerMobileListNode = this.node.getNode('.header-list.-mob') as HTMLElement;
+    //WIP attempting to solve scroll when menu has many items
+    //this.headerMobileListNode = this.node.getNode('.header-list.-mob .header-list-items') as HTMLElement;
     this.viewNodeList = document.getNodes('main view') as HTMLElement[];
   }
 
   private readonly VIEW_QUERYPARAM = 'view';
   private readonly VIEW_VISIBLE_CLASS = 'visible';
   private readonly BUTTON_ACTIVE_CLASS = 'active';
+  private readonly MOBILE_MENU_BUTTON_ICON_HIDDEN_CLASS = 'hidden';
+  private readonly MOBILE_MENU_VISIBLE_CLASS = 'visible';
   private readonly headerListItemTemplateNode: HTMLElement;
   private readonly headerDesktopListNode: HTMLElement;
   private readonly headerMobileListNode: HTMLElement;
@@ -28,7 +32,7 @@ export class Header implements AbsComponent {
     this.preselectHeaderItem();
   }
 
-  private assignEvents(viewNode: HTMLElement) {
+  private assignViewButtonEvents(viewNode: HTMLElement) {
     const viewNodeId = viewNode.getAttribute('id') as string;
 
     const viewDesktopButtonNode = this.headerDesktopListNode.getNode(`button[data-target-id="${viewNodeId}"]`) as HTMLButtonElement;
@@ -75,6 +79,34 @@ export class Header implements AbsComponent {
     });
   }
 
+  private assignMobileMenuEvents() {
+    const menuButtonNode = this.node.getNode('[js-mobile-menu]') as HTMLButtonElement;
+    
+    //FIXME abs-utils v1.3 is not released yet
+    menuButtonNode.on('click', () => {
+      const menuIconNode = menuButtonNode.getNode('.micon[name="menu"]') as HTMLElement;
+      const closeIconNode = menuButtonNode.getNode('.micon[name="close"]') as HTMLElement;
+      
+      menuIconNode.classList.toggle(this.MOBILE_MENU_BUTTON_ICON_HIDDEN_CLASS);
+      closeIconNode.classList.toggle(this.MOBILE_MENU_BUTTON_ICON_HIDDEN_CLASS);
+      
+      const isMenuOpen = menuIconNode?.classList.contains(this.MOBILE_MENU_BUTTON_ICON_HIDDEN_CLASS)
+
+      Anime.animate(
+        isMenuOpen ? closeIconNode : menuIconNode,
+        {
+          opacity: [0, 1],
+          scale: [.8, 1],
+          
+          duration: 400,
+        }
+      );
+
+      const mobileMenu = this.node.getNode('.header-list.-mob');
+      isMenuOpen ? mobileMenu?.classList.add(this.MOBILE_MENU_VISIBLE_CLASS) : mobileMenu?.classList.remove(this.MOBILE_MENU_VISIBLE_CLASS);
+    });
+  }
+
   private buildHeaderList() {
     this.viewNodeList?.sort((a, b) => {
       const aTitle = (a.getAttribute('data-title') as string).toLowerCase();
@@ -104,8 +136,9 @@ export class Header implements AbsComponent {
         bracketType: AbsTemplateBracketType.SQUARE,
       });
 
-      this.assignEvents(viewNode);
+      this.assignViewButtonEvents(viewNode);
     });
+    this.assignMobileMenuEvents();
 
     this.headerDesktopButtonNodeList = this.headerDesktopListNode.getNodes('button') as HTMLButtonElement[];
     this.headerMobileButtonNodeList = this.headerMobileListNode.getNodes('button') as HTMLButtonElement[];

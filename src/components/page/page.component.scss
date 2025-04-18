@@ -15,7 +15,7 @@
   }
 
   main {
-    margin-top: 60px;
+    margin-top: calc( var(--header-height) + 60px);
     margin-left: var(--page-spacing);
     margin-right: var(--page-spacing);
   }
