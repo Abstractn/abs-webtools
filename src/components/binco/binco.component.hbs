@@ -16,6 +16,14 @@
       attributes="js-encode"
       reverseIcon="true"
     }}
+    {{> components/atoms/input-number/input-number.atom
+      initialValue="1"
+      inputAttributes="js-segment"
+      min=1
+      max=9
+      controls=true
+      disabled="true"
+    }}
     {{> components/atoms/button/button.atom
       type="secondary"
       label="DECODE"

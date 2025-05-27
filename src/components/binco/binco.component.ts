@@ -6,6 +6,7 @@ export class Binco implements AbsComponent {
     this.codeInputNode = this.node.getNode('[js-code]') as HTMLInputElement;
     this.encodeButtonNode = this.node.getNode('[js-encode]') as HTMLButtonElement;
     this.decodeButtonNode = this.node.getNode('[js-decode]') as HTMLButtonElement;
+    this.segmentInputNode = this.node.getNode('[js-segment]') as HTMLInputElement;
   }
 
   private readonly BYTE_LENGTH: number = 8;
@@ -14,6 +15,7 @@ export class Binco implements AbsComponent {
   private readonly codeInputNode: HTMLInputElement;
   private readonly encodeButtonNode: HTMLButtonElement;
   private readonly decodeButtonNode: HTMLButtonElement;
+  private readonly segmentInputNode: HTMLInputElement;
 
   private textToBinary(text: string): string {
     let res = '';
@@ -27,21 +29,47 @@ export class Binco implements AbsComponent {
     return res;
   }
 
-  private binaryCounter(binaryString: string): string {
+  private binaryCounter(binaryString: string, segment: number): string {
     if(binaryString === '') {
       return '';
     } else {
-      let res = binaryString[0] === '0' ? '-' : '+';
-      let counter = 1;
-      for(let i = 1; i <= binaryString.length; i++) {
-        if(binaryString[i] === binaryString[i-1]) {
-          counter++;
-        } else {
-          res += counter;
-          counter = 1;
+      if(segment !== 1) {
+        let res = '';
+        let counter = 1;
+
+        for(let i = 0; i <= binaryString.length; i++) {
+          if((i + segment) % segment === 0) {
+            if(i != 0) {
+              res += counter;
+            }
+            if(i != binaryString.length) {
+              res += binaryString[i] === '0' ? '-' : '+';
+              counter = 1;
+            }
+          } else {
+            if(binaryString[i] === binaryString[i-1]) {
+              counter++;
+            } else {
+              res += counter;
+              counter = 1;
+            }
+          }
         }
+
+        return res;
+      } else {
+        let res = binaryString[0] === '0' ? '-' : '+';
+        let counter = 1;
+        for(let i = 1; i <= binaryString.length; i++) {
+          if(binaryString[i] === binaryString[i-1]) {
+            counter++;
+          } else {
+            res += counter;
+            counter = 1;
+          }
+        }
+        return res;
       }
-      return res;
     }
   }
 
@@ -80,11 +108,12 @@ export class Binco implements AbsComponent {
 
   private encode(value: string): string {
     let res = '';
+    const segment = parseInt(this.segmentInputNode.value) || 1;
     const binary: string = this.textToBinary(value);
     if(binary === this.UNSUPPORTED_CHARACTER_ERROR) {
       res = this.UNSUPPORTED_CHARACTER_ERROR;  
     } else {
-      res = this.binaryCounter(binary);
+      res = this.binaryCounter(binary, segment);
     }
     return res;
   }
