@@ -7,6 +7,7 @@ import { absPolyfill } from '../../abs-utils/src/abs-utils.ts';
 
 import { InputText } from './components/atoms/input-text/input-text.atom.ts';
 import { InputNumber } from './components/atoms/input-number/input-number.atom.ts';
+import { InputNumberRange } from './components/atoms/input-number-range/input-number-range.atom.ts';
 import { InputArea } from './components/atoms/input-area/input-area.atom.ts';
 import { InputDate } from './components/atoms/input-date/input-date.atom.ts';
 
@@ -26,6 +27,7 @@ export const absComponentManager = new AbsComponentManager({
 [
   InputText,
   InputNumber,
+  InputNumberRange,
   InputArea,
   InputDate,
 

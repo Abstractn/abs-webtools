@@ -1,35 +1,29 @@
 <view id="ani-calc" cmp="AniCalc" data-title="AniCalc">
   <div class="inputs-wrapper">
-    <fieldset>
-      <legend>airing start date</legend>
-      {{> components/atoms/input-date/input-date.atom
-        inputAttributes="js-start"
-      }}
-    </fieldset>
-    <fieldset>
-      <legend>number of episodes</legend>
-      {{> components/atoms/input-number/input-number.atom
-        inputAttributes="js-duration"
-        initialValue="12"
-        controls="true"
-      }}
-    </fieldset>
-    <fieldset class="disabled">
-      <legend>release frequency (days)</legend>
-      {{> components/atoms/input-number/input-number.atom
-        inputAttributes="js-release-frequency disabled"
-        initialValue="7"
-        controls="true"
-      }}
-    </fieldset>
-    <fieldset class="disabled">
-      <legend>watch frequency (per day)</legend>
-      {{> components/atoms/input-number/input-number.atom
-        inputAttributes="js-watch-frequency disabled"
-        initialValue="1"
-        controls="true"
-      }}
-    </fieldset>
+    {{> components/atoms/input-date/input-date.atom
+      label="airing start date"
+      inputAttributes="js-start"
+    }}
+    {{> components/atoms/input-number/input-number.atom
+      label="number of episodes"
+      inputAttributes="js-duration"
+      initialValue="12"
+      controls="true"
+    }}
+    {{> components/atoms/input-number/input-number.atom
+      label="release frequency (days)"
+      disabled="true"
+      inputAttributes="js-release-frequency disabled"
+      initialValue="7"
+      controls="true"
+    }}
+    {{> components/atoms/input-number/input-number.atom
+      label="watch frequency (per day)"
+      disabled="true"
+      inputAttributes="js-watch-frequency disabled"
+      initialValue="1"
+      controls="true"
+    }}
   </div>
 
   {{> components/atoms/button/button.atom
@@ -39,17 +33,13 @@
   }}
 
   <div class="inputs-wrapper">
-    <fieldset>
-      <legend>begin</legend>
-      {{> components/atoms/input-text/input-text.atom
-        inputAttributes="js-result readonly"
-      }}
-    </fieldset>
-    <fieldset>
-      <legend>estimated end date</legend>
-      {{> components/atoms/input-text/input-text.atom
-        inputAttributes="js-end readonly"
-      }}
-    </fieldset>
+    {{> components/atoms/input-text/input-text.atom
+      label="begin"
+      inputAttributes="js-result readonly"
+    }}
+    {{> components/atoms/input-text/input-text.atom
+      label="estimated end date"
+      inputAttributes="js-end readonly"
+    }}
   </div>
 </view>

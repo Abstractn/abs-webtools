@@ -1,39 +1,29 @@
 <view id="proportional-range" cmp="ProportionalRange" data-title="Proportional Range">
   <div class="inputs-wrapper">
-    <fieldset>
-      <legend>initial range</legend>
-      {{> components/atoms/input-number/input-number.atom
-        initialValue="0"
-        inputAttributes="js-old-min"
-        controls=true
-      }}
-      {{> components/atoms/input-number/input-number.atom
-        initialValue="100"
-        inputAttributes="js-old-max"
-        controls=true
-      }}
-    </fieldset>
-    <fieldset>
-      <legend>new range</legend>
-      {{> components/atoms/input-number/input-number.atom
-        initialValue="0"
-        inputAttributes="js-new-min"
-        controls=true
-      }}
-      {{> components/atoms/input-number/input-number.atom
-        initialValue="1"
-        inputAttributes="js-new-max"
-        controls=true
-      }}
-    </fieldset>
-    <fieldset>
-      <legend>value</legend>
-      {{> components/atoms/input-number/input-number.atom
-        initialValue="1"
-        inputAttributes="js-value"
-        controls=true
-      }}
-    </fieldset>
+    {{> components/atoms/input-number-range/input-number-range.atom
+      label="initial range"
+      firstInitialValue="0"
+      firstInputAttributes="js-old-min"
+      firstControls=true
+      secondInitialValue="100"
+      secondInputAttributes="js-old-max"
+      secondControls=true
+    }}
+    {{> components/atoms/input-number-range/input-number-range.atom
+      label="new range"
+      firstInitialValue="0"
+      firstInputAttributes="js-new-min"
+      firstControls=true
+      secondInitialValue="1"
+      secondInputAttributes="js-new-max"
+      secondControls=true
+    }}
+    {{> components/atoms/input-number/input-number.atom
+      label="value"
+      initialValue="1"
+      inputAttributes="js-value"
+      controls=true
+    }}
   </div>
   
   {{> components/atoms/button/button.atom
@@ -43,6 +33,7 @@
   }}
 
   {{> components/atoms/input-text/input-text.atom
+    label="new value"
     inputAttributes="js-calculation-output readonly"
   }}
 </view>

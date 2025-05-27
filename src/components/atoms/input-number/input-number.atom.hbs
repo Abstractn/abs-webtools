@@ -1,6 +1,6 @@
 <component
   cmp="InputNumber"
-  {{#if classes}} class="{{classes}}" {{/if}}
+  class="{{classes}} {{#if disabled}}disabled{{/if}}"
 >
   {{#if label}}<label>{{label}}</label>{{/if}}
   <input
@@ -9,15 +9,22 @@
     {{#if max}} max="{{max}}" {{/if}}
     {{#if initialValue}} value="{{initialValue}}" {{/if}}
     {{#if inputAttributes}}{{inputAttributes}}{{/if}}
+    {{#if disabled}}disabled{{/if}}
   />
   {{#if controls}}
   <div class="input-controls">
-    <button js-up>
+    <button
+      js-up
+      {{#if disabled}}disabled{{/if}}
+    >
       {{> components/atoms/micon/micon.atom
         name="chevron-up"
       }}
     </button>
-    <button js-down>
+    <button
+      js-down
+      {{#if disabled}}disabled{{/if}}
+    >
       {{> components/atoms/micon/micon.atom
         name="chevron-down"
       }}

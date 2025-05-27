@@ -1,6 +1,29 @@
 [cmp="InputNumber"] {
   position: relative;
 
+  &.disabled {
+    opacity: .4;
+    pointer-events: none;
+  }
+
+  label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+
+    &:after {
+      content: '';
+      display: inline-block;
+      flex-grow: 1;
+      //height: 1px;
+      //background-color: white;
+      height: 0;
+      border-top: solid white 1px;
+    }
+  }
+
   input {
     width: 100%;
     color: white;
@@ -37,6 +60,12 @@
   }
 
   .input-controls {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    bottom: 0;
+    right: 2px;
+
     button {
       --size: 16px;
       --padding: 2px;
@@ -45,20 +74,10 @@
       border: 0;
       border-radius: 2px;
       padding: var(--padding);
-      position: absolute;
-      right: 2px;
       width: calc(var(--size) + (var(--padding) * 2));
       height: calc(var(--size) + (var(--padding) * 2));
       transition: var(--transition-duration);
       cursor: pointer;
-
-      &[js-up] {
-        top: 0;
-      }
-      
-      &[js-down] {
-        bottom: 0;
-      }
 
       &:focus {
         outline: none;

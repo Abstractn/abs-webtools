@@ -1,12 +1,9 @@
 <view id="binco" cmp="Binco" data-title="BinCo">
-  {{!-- (binco component) --}}
   <div class="inputs-wrapper">
-    <fieldset>
-      <legend>text</legend>
-      {{> components/atoms/input-area/input-area.atom
-        inputAttributes="js-text"
-      }}
-    </fieldset>
+    {{> components/atoms/input-area/input-area.atom
+      label="text"
+      inputAttributes="js-text"
+    }}
   </div>
   <div class="buttons-container">
     {{> components/atoms/button/button.atom
@@ -32,11 +29,9 @@
     }}
   </div>
   <div class="inputs-wrapper">
-    <fieldset>
-      <legend>code</legend>
-      {{> components/atoms/input-area/input-area.atom
-        inputAttributes="js-code"
-      }}
-    </fieldset>
+    {{> components/atoms/input-area/input-area.atom
+      label="code"
+      inputAttributes="js-code"
+    }}
   </div>
 </view>

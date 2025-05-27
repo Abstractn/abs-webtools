@@ -1,4 +1,21 @@
 [cmp="InputDate"] {
+  label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+
+    &:after {
+      content: '';
+      display: inline-block;
+      flex-grow: 1;
+      //height: 1px;
+      //background-color: white;
+      height: 0;
+      border-top: solid white 1px;
+    }
+  }
   
   input {
     width: 100%;

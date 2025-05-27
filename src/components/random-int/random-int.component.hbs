@@ -1,18 +1,14 @@
 <view id="random-int" cmp="RandomInt" data-title="Random Int">
   <div class="inputs-wrapper">
-    <fieldset>
-      <legend>range</legend>
-      {{> components/atoms/input-number/input-number.atom
-        initialValue="0"
-        inputAttributes="js-min"
-        controls=true
-      }}
-      {{> components/atoms/input-number/input-number.atom
-        initialValue="1"
-        inputAttributes="js-max"
-        controls=true
-      }}
-    </fieldset>
+    {{> components/atoms/input-number-range/input-number-range.atom
+      label="range"
+      firstInitialValue="0"
+      firstInputAttributes="js-min"
+      firstControls=true
+      secondInitialValue="1"
+      secondInputAttributes="js-max"
+      secondControls=true
+    }}
   </div>
   {{> components/atoms/button/button.atom
     type="secondary"
@@ -20,6 +16,7 @@
     attributes="js-generate"
   }}
   {{> components/atoms/input-text/input-text.atom
+    label="result"
     inputAttributes="js-generate-output readonly"
   }}
 </view>
