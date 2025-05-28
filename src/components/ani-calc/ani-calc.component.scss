@@ -1,38 +1,6 @@
 [cmp="AniCalc"] {
   --display: flex !important;
+  
   flex-direction: column;
-  gap: 16px;
-
-  .inputs-wrapper {
-    margin-bottom: 32px;
-    display: flex;
-    flex-direction: column;
-    gap: 32px;
-  }
-
-  //TODO delete?
-  fieldset {
-    display: flex;
-    gap: 64px;
-    border-top: solid white 1px;
-    padding-top: 8px;
-
-    @include breakpoint(tab-down) {
-      flex-direction: column;
-      gap: 16px;
-    }
-
-    legend {
-      padding-right: 8px;
-    }
-
-    >*:not(legend) {
-      width: 100%;
-    }
-
-    &.disabled {
-      opacity: .4;
-      pointer-events: none;
-    }
-  }
+  gap: 32px;
 }

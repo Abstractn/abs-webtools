@@ -1,5 +1,5 @@
 <view id="ani-calc" cmp="AniCalc" data-title="AniCalc">
-  <div class="inputs-wrapper">
+  <div class="double-input-container">
     {{> components/atoms/input-date/input-date.atom
       label="airing start date"
       inputAttributes="js-start"
@@ -10,6 +10,8 @@
       initialValue="12"
       controls="true"
     }}
+  </div>
+  <div class="double-input-container">
     {{> components/atoms/input-number/input-number.atom
       label="release frequency (days)"
       disabled="true"
@@ -32,7 +34,7 @@
     attributes="js-calculate"
   }}
 
-  <div class="inputs-wrapper">
+  <div class="double-input-container">
     {{> components/atoms/input-text/input-text.atom
       label="begin"
       inputAttributes="js-result readonly"

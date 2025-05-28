@@ -57,6 +57,10 @@
     resize: none;
     height: 200px;
 
+    @include breakpoint(tab-down) {
+      height: 100px;
+    }
+
     &::placeholder {
       color: #CCC;
     }

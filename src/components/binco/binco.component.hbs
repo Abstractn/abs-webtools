@@ -1,11 +1,9 @@
 <view id="binco" cmp="Binco" data-title="BinCo">
-  <div class="inputs-wrapper">
-    {{> components/atoms/input-area/input-area.atom
-      label="text"
-      inputAttributes="js-text"
-    }}
-  </div>
-  <div class="buttons-container">
+  {{> components/atoms/input-area/input-area.atom
+    label="text"
+    inputAttributes="js-text"
+  }}
+  <div class="double-input-container">
     {{> components/atoms/button/button.atom
       type="secondary"
       label="ENCODE"
@@ -14,6 +12,7 @@
       reverseIcon="true"
     }}
     {{> components/atoms/input-number/input-number.atom
+      label="segmentation"
       initialValue="1"
       inputAttributes="js-segment"
       min=1
@@ -28,10 +27,8 @@
       attributes="js-decode"
     }}
   </div>
-  <div class="inputs-wrapper">
-    {{> components/atoms/input-area/input-area.atom
-      label="code"
-      inputAttributes="js-code"
-    }}
-  </div>
+  {{> components/atoms/input-area/input-area.atom
+    label="code"
+    inputAttributes="js-code"
+  }}
 </view>

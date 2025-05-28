@@ -1,40 +1,12 @@
 [cmp="Binco"] {
   --display: flex !important;
+
   flex-direction: column;
-  gap: 16px;
+  gap: 32px;
 
   .inputs-wrapper {
     display: flex;
     flex-direction: column;
     gap: 32px;
-  }
-
-  fieldset {
-    display: flex;
-    gap: 64px;
-    border-top: solid white 1px;
-    padding-top: 8px;
-
-    @include breakpoint(tab-down) {
-      flex-direction: column;
-      gap: 16px;
-    }
-
-    legend {
-      padding-right: 8px;
-    }
-
-    >*:not(legend) {
-      width: 100%;
-    }
-  }
-
-  .buttons-container {
-    display: flex;
-    gap: 32px;
-
-    button {
-      width: 100%;
-    }
   }
 }

@@ -18,6 +18,10 @@
     margin-top: calc( var(--header-height) + 60px);
     margin-left: var(--page-spacing);
     margin-right: var(--page-spacing);
+
+    @include breakpoint(tab-down) {
+      margin-top: calc( var(--header-height) + 40px);
+    }
   }
 
   view {
@@ -26,6 +30,19 @@
     &.visible {
       --display: block;
       display: var(--display);
+    }
+  }
+
+  .double-input-container {
+    display: flex;
+    gap: 32px;
+
+    >* {
+      width: 100%;
+    }
+
+    @include breakpoint(tab-down) {
+      flex-direction: column;
     }
   }
 }

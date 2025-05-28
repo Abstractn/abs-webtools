@@ -1,6 +1,6 @@
 <view id="random-int" cmp="RandomInt" data-title="Random Int">
-  <div class="inputs-wrapper">
-    {{> components/atoms/input-number-range/input-number-range.atom
+  <div class="double-input-container">
+    {{!-- {{> components/atoms/input-number-range/input-number-range.atom
       label="range"
       firstInitialValue="0"
       firstInputAttributes="js-min"
@@ -8,6 +8,18 @@
       secondInitialValue="1"
       secondInputAttributes="js-max"
       secondControls=true
+    }} --}}
+    {{> components/atoms/input-number/input-number.atom
+      label="min"
+      initialValue="0"
+      inputAttributes="js-min"
+      controls=true
+    }}
+    {{> components/atoms/input-number/input-number.atom
+      label="max"
+      initialValue="1"
+      inputAttributes="js-max"
+      controls=true
     }}
   </div>
   {{> components/atoms/button/button.atom

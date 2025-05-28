@@ -173,4 +173,9 @@
       background-color: white;
     }
   }
+
+  .disabled {
+    opacity: .4;
+    pointer-events: none;
+  }
 }
