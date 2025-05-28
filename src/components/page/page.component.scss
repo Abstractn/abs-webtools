@@ -1,19 +1,6 @@
 [cmp="Page"] {
   position: relative;
 
-  .page-background {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-image: url('/imgs/abs_bg-blur.png');
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    z-index: -1;
-  }
-
   main {
     margin-top: calc( var(--header-height) + 60px);
     margin-left: var(--page-spacing);

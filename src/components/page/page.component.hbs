@@ -1,5 +1,7 @@
 <body cmp="Page">
-  <div class="page-background"></div>
+  {{> components/background/background.component
+    type="svg"
+  }}
   {{> components/header/header.component }}
   <main>
     {{> components/ani-calc/ani-calc.component }}

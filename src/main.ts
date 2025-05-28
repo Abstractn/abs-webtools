@@ -10,6 +10,7 @@ import { InputArea } from './components/atoms/input-area/input-area.atom.ts';
 import { InputDate } from './components/atoms/input-date/input-date.atom.ts';
 
 import { AniCalc } from './components/ani-calc/ani-calc.component.ts';
+import { Background } from './components/background/background.component.ts';
 import { Binco } from './components/binco/binco.component.ts';
 import { Header } from './components/header/header.component.ts';
 import { Page } from './components/page/page.component.ts';
@@ -30,6 +31,7 @@ export const absComponentManager = new AbsComponentManager({
   InputDate,
 
   AniCalc,
+  Background,
   Binco,
   Header,
   Page,
