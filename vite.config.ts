@@ -13,6 +13,9 @@ export default {
       keep_classnames: true,
     },
   },
+  server: {
+    host: true,
+  },
   plugins: [
     handlebars({
       partialDirectory: path.resolve(__dirname, 'src'),
