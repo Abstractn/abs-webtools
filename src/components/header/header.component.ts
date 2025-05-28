@@ -2,6 +2,7 @@ import { AbsComponent } from 'abs-component';
 import { AbsTemplate, AbsTemplatePrintMethod, AbsTemplateBracketType } from 'abs-template';
 import { queryParam } from '../../script/utils';
 import * as Anime from 'animejs';
+import { getNode } from 'abs-utilities';
 
 export class Header implements AbsComponent {
   constructor(public readonly node: HTMLElement) {
@@ -81,8 +82,8 @@ export class Header implements AbsComponent {
 
   private assignMobileMenuEvents() {
     const menuButtonNode = this.node.getNode('[js-mobile-menu]') as HTMLButtonElement;
-    
-    //FIXME abs-utils v1.3 is not released yet
+    //FIXME incorrect typing definition in abs-utils?
+    //@ts-ignore
     menuButtonNode.on('click', () => {
       const menuIconNode = menuButtonNode.getNode('.micon[name="menu"]') as HTMLElement;
       const closeIconNode = menuButtonNode.getNode('.micon[name="close"]') as HTMLElement;
@@ -105,6 +106,21 @@ export class Header implements AbsComponent {
       const mobileMenu = this.node.getNode('.header-list.-mob');
       isMenuOpen ? mobileMenu?.classList.add(this.MOBILE_MENU_VISIBLE_CLASS) : mobileMenu?.classList.remove(this.MOBILE_MENU_VISIBLE_CLASS);
     });
+
+    //FIXME incorrect typing definition in abs-utils?
+    //@ts-ignore
+    getNode('body')?.on('click', (event) => {
+      const menuIconNode = menuButtonNode.getNode('.micon[name="menu"]') as HTMLElement;
+      const isMenuOpen = menuIconNode?.classList.contains(this.MOBILE_MENU_BUTTON_ICON_HIDDEN_CLASS)
+      const isClickInHeader = (
+        this.node == event.target ||
+        this.node.contains(event.target as HTMLElement)
+      );
+
+      if(isMenuOpen && !isClickInHeader) {
+        menuButtonNode.click();
+      }
+    })
   }
 
   private buildHeaderList() {
