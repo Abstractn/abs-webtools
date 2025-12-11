@@ -8,10 +8,8 @@ import { ANIMATION_TRANSITION_DURATION } from '../../script/consts';
 export class Header implements AbsComponent {
   constructor(public readonly node: HTMLElement) {
     this.headerListItemTemplateNode = this.node.getNode('template#header-list-item') as HTMLElement;
-    this.headerDesktopListNode = this.node.getNode('.header-list.-dsk') as HTMLElement;
-    this.headerMobileListNode = this.node.getNode('.header-list.-mob') as HTMLElement;
-    //WIP attempting to solve scroll when menu has many items
-    //this.headerMobileListNode = this.node.getNode('.header-list.-mob .header-list-items') as HTMLElement;
+    this.headerDesktopListNode = this.node.getNode('[js-menu-dsk]') as HTMLElement;
+    this.headerMobileListNode = this.node.getNode('[js-menu-mob]') as HTMLElement;
     this.viewNodeList = document.getNodes('main view') as HTMLElement[];
   }
 

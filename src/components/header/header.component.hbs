@@ -9,15 +9,16 @@
       classes="hidden"
     }}
   </button>
-  <div class="header-list -dsk"></div>
+  <div class="header-list -dsk" js-menu-dsk></div>
   <div class="header-list -mob">
     <button js-mobile-menu-search class="disabled">
       {{> components/atoms/micon/micon.atom
         name="search"
       }}
     </button>
-    <!-- WIP -->
-    {{!-- <div class="header-list-items"></div> --}}
+    <div class="header-list-scroll-container">
+      <div class="header-list-track" js-menu-mob></div>
+    </div>
   </div>
 
   <template id="header-list-item">

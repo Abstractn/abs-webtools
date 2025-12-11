@@ -67,6 +67,15 @@
     }
   }
 
+  .header-list-scroll-container {
+    display: flex;
+    overflow-y: auto;
+  }
+
+  .header-list-track {
+    display: flex;
+    gap: 16px;
+  }
   
   .header-list-item {
     --highlight-size: 2px;
