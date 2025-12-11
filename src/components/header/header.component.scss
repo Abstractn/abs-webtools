@@ -4,12 +4,12 @@
   align-items: center;
   position: fixed;
   top: 0;
-  width: 100%;
+  width: 100vw;
   height: var(--header-height);
   padding-left: var(--page-spacing);
   padding-right: var(--page-spacing);
   background-color: rgba(0, 0, 0, .4);
-  transition: background-color .3s;
+  transition: background-color var(--transition-duration);
   z-index: 100;
 
   @include breakpoint(tab-down) {
@@ -47,14 +47,14 @@
 
       position: fixed;
       top: var(--header-height);
-      right: calc( var(--menu-width) * -1 );
+      left: 100vw;
       width: var(--menu-width);
       height: calc( 100vh - var(--header-height) );
       writing-mode: vertical-lr;
       text-orientation: mixed;
       background-color: rgba(0, 0, 0, .4);
       padding: 16px 0;
-      transition: background-color .3s, right .3s;
+      transition: background-color var(--transition-duration), left var(--transition-duration);
       z-index: 10;
 
       &:hover {
@@ -62,7 +62,7 @@
       }
 
       &.visible {
-        right: 0;
+        left: calc( 100vw - var(--menu-width) );
       }
     }
   }

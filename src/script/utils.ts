@@ -28,3 +28,8 @@ export const queryParam = {
     window.history.pushState({ path: newUrl }, '', newUrl);
   },
 };
+
+export const getNumericalVariableFromStyle = (variableName: string, defaultValue: number = 0): number => {
+  const variableValue = getComputedStyle(document.documentElement).getPropertyValue(variableName).trim();
+  return variableValue ? parseFloat(variableValue) : defaultValue;
+}

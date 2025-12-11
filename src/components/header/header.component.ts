@@ -3,6 +3,7 @@ import { AbsTemplate, AbsTemplatePrintMethod, AbsTemplateBracketType } from 'abs
 import { queryParam } from '../../script/utils';
 import * as Anime from 'animejs';
 import { getNode } from 'abs-utilities';
+import { ANIMATION_TRANSITION_DURATION } from '../../script/consts';
 
 export class Header implements AbsComponent {
   constructor(public readonly node: HTMLElement) {
@@ -60,7 +61,7 @@ export class Header implements AbsComponent {
                 translateX: [isCurrentBefore ? -100 : 100, 0],
                 opacity: [0, 1],
 
-                duration: 400,
+                duration: ANIMATION_TRANSITION_DURATION,
                 ease: Anime.eases.out(4),
               });
             }
@@ -98,7 +99,7 @@ export class Header implements AbsComponent {
           opacity: [0, 1],
           scale: [.8, 1],
           
-          duration: 400,
+          duration: ANIMATION_TRANSITION_DURATION,
         }
       );
 
