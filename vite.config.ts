@@ -7,7 +7,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 export default {
-  base: '/abs-webtools/dist/',
+  base: '/abs-webtools/',
   build: {
     minify: 'terser',
     terserOptions: {
@@ -16,6 +16,18 @@ export default {
   },
   server: {
     host: true,
+  },
+  css: {
+    preprocessorOptions: {
+      scss: {
+        logger: {
+          warn: function(message: string, options: { deprecation: boolean }) {
+            if(options.deprecation) return;
+            console.warn(message);
+          }
+        }
+      },
+    },
   },
   plugins: [
     handlebars({
