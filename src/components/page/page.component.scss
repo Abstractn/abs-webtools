@@ -3,8 +3,8 @@
 
   main {
     margin-top: calc( var(--header-height) + 60px);
-    margin-left: var(--page-spacing);
-    margin-right: var(--page-spacing);
+    padding-left: var(--page-spacing);
+    padding-right: var(--page-spacing);
 
     @include breakpoint(tab-down) {
       margin-top: calc( var(--header-height) + 40px);
