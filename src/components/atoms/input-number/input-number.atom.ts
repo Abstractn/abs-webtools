@@ -9,8 +9,8 @@ export class InputNumber implements AbsComponent {
     this.inputNode = this.node.getNode('input') as HTMLInputElement;
     this.increaseButtonNode = this.node.getNode('button[js-up]') as HTMLButtonElement|null;
     this.decreaseButtonNode = this.node.getNode('button[js-down]') as HTMLButtonElement|null;
-    const parsedMin = parseInt(this.inputNode.getAttribute('min') as string);
-    const parsedMax = parseInt(this.inputNode.getAttribute('max') as string);
+    const parsedMin = parseInt(this.inputNode.attr('min') as string);
+    const parsedMax = parseInt(this.inputNode.attr('max') as string);
     this.min = Number.isNaN(parsedMin) ? null : parsedMin;
     this.max = Number.isNaN(parsedMax) ? null : parsedMax;
   }
@@ -33,30 +33,30 @@ export class InputNumber implements AbsComponent {
     const isPastMax = Boolean(this.max && parsedValue >= this.max);
     const isPastMin = Boolean(this.min && parsedValue <= this.min);
 
-    (this.increaseButtonNode && isPastMax) && this.increaseButtonNode.setAttribute('disabled', 'true');
-    (this.decreaseButtonNode && isPastMin) && this.decreaseButtonNode.setAttribute('disabled', 'true');
+    (this.increaseButtonNode && isPastMax) && this.increaseButtonNode.attr('disabled', 'true');
+    (this.decreaseButtonNode && isPastMin) && this.decreaseButtonNode.attr('disabled', 'true');
   }
 
   setButtonEvents() {
-    this.increaseButtonNode?.addEventListener('click', () => {
+    this.increaseButtonNode?.on('click' as keyof ElementEventMap, () => {
       //BUG if keyboard arrows are used then button is clicked, number passes limit
       const parsedValue = parseInt(this.inputNode.value);
       this.inputNode.value = (parsedValue + 1).toString();
       const newParsedValue = parseInt(this.inputNode.value);
 
       const isPastMax = Boolean(this.max !== null && newParsedValue >= this.max);
-      isPastMax && this.increaseButtonNode?.setAttribute('disabled', 'true');
+      isPastMax && this.increaseButtonNode?.attr('disabled', 'true');
       this.decreaseButtonNode?.removeAttribute('disabled');
     });
 
-    this.decreaseButtonNode?.addEventListener('click', () => {
+    this.decreaseButtonNode?.on('click' as keyof ElementEventMap, () => {
       //BUG if keyboard arrows are used then button is clicked, number passes limit
       const parsedValue = parseInt(this.inputNode.value);
       this.inputNode.value = (parsedValue - 1).toString();
       const newParsedValue = parseInt(this.inputNode.value);
       
       const isPastMin = Boolean(this.min !== null && newParsedValue <= this.min);
-      isPastMin && this.decreaseButtonNode?.setAttribute('disabled', 'true');
+      isPastMin && this.decreaseButtonNode?.attr('disabled', 'true');
       this.increaseButtonNode?.removeAttribute('disabled');
     });
   }

@@ -15,7 +15,7 @@ export class RandomInt implements AbsComponent {
   private readonly outputInputNode: HTMLInputElement;
 
   private setGenerateButtonEvent(): void {
-    this.generateButtonNode.addEventListener('click', (event) => {
+    this.generateButtonNode.on('click' as keyof ElementEventMap, (event) => {
       const minValue = this.minValueInputNode.value !== '' ? parseInt(this.minValueInputNode.value) : 0;
       const maxValue = this.maxValueInputNode.value !== '' ? parseInt(this.maxValueInputNode.value) : 1;
       const res = randomInt(minValue, maxValue);
@@ -24,7 +24,7 @@ export class RandomInt implements AbsComponent {
   }
 
   private setCopyInputEvent(): void {
-    this.outputInputNode.addEventListener('click', (event) => {
+    this.outputInputNode.on('click' as keyof ElementEventMap, (event) => {
       const value = this.outputInputNode.value;
       this.outputInputNode.select();
       this.outputInputNode.setSelectionRange(0, 99999);

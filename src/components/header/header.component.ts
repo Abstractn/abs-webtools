@@ -34,13 +34,13 @@ export class Header implements AbsComponent {
   }
 
   private assignViewButtonEvents(viewNode: HTMLElement) {
-    const viewNodeId = viewNode.getAttribute('id') as string;
+    const viewNodeId = viewNode.attr('id') as string;
 
     const viewDesktopButtonNode = this.headerDesktopListNode.getNode(`button[data-target-id="${viewNodeId}"]`) as HTMLButtonElement;
     const viewMobileButtonNode = this.headerMobileListNode.getNode(`button[data-target-id="${viewNodeId}"]`) as HTMLButtonElement;
 
     [viewDesktopButtonNode, viewMobileButtonNode].forEach(viewButtonNode => {
-      viewButtonNode.addEventListener('click', (event) => {
+      viewButtonNode.on('click' as keyof ElementEventMap, (event) => {
         const previousVisibleView = document.getNode('main view.visible');
         const previousActiveDesktopButtonNode = this.headerDesktopListNode.getNode('button.active');
         const previousActiveMobileButtonNode = this.headerMobileListNode.getNode('button.active');
@@ -83,8 +83,7 @@ export class Header implements AbsComponent {
   private assignMobileMenuEvents() {
     const menuButtonNode = this.node.getNode('[js-mobile-menu]') as HTMLButtonElement;
     //FIXME incorrect typing definition in abs-utils?
-    //@ts-ignore
-    menuButtonNode.on('click', () => {
+    menuButtonNode.on('click' as keyof ElementEventMap, () => {
       const menuIconNode = menuButtonNode.getNode('.micon[name="menu"]') as HTMLElement;
       const closeIconNode = menuButtonNode.getNode('.micon[name="close"]') as HTMLElement;
       
@@ -108,8 +107,7 @@ export class Header implements AbsComponent {
     });
 
     //FIXME incorrect typing definition in abs-utils?
-    //@ts-ignore
-    getNode('body')?.on('click', (event) => {
+    getNode('body')?.on('click' as keyof ElementEventMap, (event) => {
       const menuIconNode = menuButtonNode.getNode('.micon[name="menu"]') as HTMLElement;
       const isMenuOpen = menuIconNode?.classList.contains(this.MOBILE_MENU_BUTTON_ICON_HIDDEN_CLASS)
       const isClickInHeader = (
@@ -125,12 +123,12 @@ export class Header implements AbsComponent {
 
   private buildHeaderList() {
     this.viewNodeList?.sort((a, b) => {
-      const aTitle = (a.getAttribute('data-title') as string).toLowerCase();
-      const bTitle = (b.getAttribute('data-title') as string).toLowerCase();
+      const aTitle = (a.attr('data-title') as string).toLowerCase();
+      const bTitle = (b.attr('data-title') as string).toLowerCase();
       return aTitle.localeCompare(bTitle);
     }).forEach(viewNode => {
-      const viewNodeId = viewNode.getAttribute('id') as string;
-      const viewNodeTitle = viewNode.getAttribute('data-title') as string;
+      const viewNodeId = viewNode.attr('id') as string;
+      const viewNodeTitle = viewNode.attr('data-title') as string;
 
       const templateData = {
         targetId: viewNodeId,
@@ -163,7 +161,7 @@ export class Header implements AbsComponent {
   private preselectHeaderItem() {
     const preselectedViewId = queryParam.get('view');
     if(preselectedViewId) {
-      const preselectedViewNode = this.viewNodeList.find(viewNode => viewNode.getAttribute('id') === preselectedViewId);
+      const preselectedViewNode = this.viewNodeList.find(viewNode => viewNode.attr('id') === preselectedViewId);
       const preselectedViewDesktopButtonNode = this.headerDesktopListNode.getNode(`button[data-target-id="${preselectedViewId}"]`);
       const preselectedViewMobileButtonNode = this.headerMobileListNode.getNode(`button[data-target-id="${preselectedViewId}"]`);;
       preselectedViewNode && preselectedViewNode.classList.add(this.VIEW_VISIBLE_CLASS);
@@ -173,7 +171,7 @@ export class Header implements AbsComponent {
       this.viewNodeList[0].classList.add(this.VIEW_VISIBLE_CLASS);
       this.headerDesktopButtonNodeList[0].classList.add(this.BUTTON_ACTIVE_CLASS);
       this.headerMobileButtonNodeList[0].classList.add(this.BUTTON_ACTIVE_CLASS);
-      const viewId = this.viewNodeList[0].getAttribute('id') as string;
+      const viewId = this.viewNodeList[0].attr('id') as string;
       queryParam.set(this.VIEW_QUERYPARAM, viewId);
     }
   }

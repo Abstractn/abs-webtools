@@ -21,7 +21,7 @@ export class ProportionalRange implements AbsComponent {
   private readonly outputInputNode: HTMLInputElement;
 
   private setCalculateButtonEvent(): void {
-    this.generateButtonNode.addEventListener('click', (event) => {
+    this.generateButtonNode.on('click' as keyof ElementEventMap, (event) => {
       const oldMinValue = this.oldMinValueInputNode.value !== '' ? parseFloat(this.oldMinValueInputNode.value) : 0;
       const oldMaxValue = this.oldMaxValueInputNode.value !== '' ? parseFloat(this.oldMaxValueInputNode.value) : 100;
       const newMinValue = this.newMinValueInputNode.value !== '' ? parseFloat(this.newMinValueInputNode.value) : 0;
@@ -37,7 +37,7 @@ export class ProportionalRange implements AbsComponent {
   }
 
   private setCopyInputEvent(): void {
-    this.outputInputNode.addEventListener('click', (event) => {
+    this.outputInputNode.on('click' as keyof ElementEventMap, (event) => {
       const value = this.outputInputNode.value;
       this.outputInputNode.select();
       this.outputInputNode.setSelectionRange(0, 99999);

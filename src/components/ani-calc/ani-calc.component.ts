@@ -45,7 +45,7 @@ export class AniCalc implements AbsComponent {
   }
 
   private setEvents() {
-    this.calculateButtonNode.addEventListener('click', () => {
+    this.calculateButtonNode.on('click' as keyof ElementEventMap, () => {
       const startDate = Dayjs(this.startDateInputNode.value);
       const duration = parseInt(this.durationInputNode.value);
       const res = this.calculate(startDate, duration);

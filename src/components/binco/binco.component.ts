@@ -132,13 +132,13 @@ export class Binco implements AbsComponent {
   }
 
   private setEvents() {
-    this.encodeButtonNode.addEventListener('click', () => {
+    this.encodeButtonNode.on('click' as keyof ElementEventMap, () => {
       //this.codeInputNode.value = '';
       const res = this.encode(this.textInputNode.value);
       this.codeInputNode.value = res;
     });
     
-    this.decodeButtonNode.addEventListener('click', () => {
+    this.decodeButtonNode.on('click' as keyof ElementEventMap, () => {
       //this.textInputNode.value = '';
       const res = this.decode(this.codeInputNode.value);
       this.textInputNode.value = res;
