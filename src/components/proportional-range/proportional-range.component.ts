@@ -22,11 +22,11 @@ export class ProportionalRange implements AbsComponent {
 
   private setCalculateButtonEvent(): void {
     this.generateButtonNode.addEventListener('click', (event) => {
-      const oldMinValue = this.oldMinValueInputNode.value !== '' ? parseInt(this.oldMinValueInputNode.value) : 0;
-      const oldMaxValue = this.oldMaxValueInputNode.value !== '' ? parseInt(this.oldMaxValueInputNode.value) : 100;
-      const newMinValue = this.newMinValueInputNode.value !== '' ? parseInt(this.newMinValueInputNode.value) : 0;
-      const newMaxValue = this.newMaxValueInputNode.value !== '' ? parseInt(this.newMaxValueInputNode.value) : 1;
-      const valueValue = this.valueInputNode.value !== '' ? parseInt(this.valueInputNode.value) : 1;
+      const oldMinValue = this.oldMinValueInputNode.value !== '' ? parseFloat(this.oldMinValueInputNode.value) : 0;
+      const oldMaxValue = this.oldMaxValueInputNode.value !== '' ? parseFloat(this.oldMaxValueInputNode.value) : 100;
+      const newMinValue = this.newMinValueInputNode.value !== '' ? parseFloat(this.newMinValueInputNode.value) : 0;
+      const newMaxValue = this.newMaxValueInputNode.value !== '' ? parseFloat(this.newMaxValueInputNode.value) : 1;
+      const valueValue = this.valueInputNode.value !== '' ? parseFloat(this.valueInputNode.value) : 1;
       const res = proportionalRange(
         oldMinValue, oldMaxValue,
         newMinValue, newMaxValue,
