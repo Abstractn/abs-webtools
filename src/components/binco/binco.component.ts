@@ -1,5 +1,15 @@
 import { AbsComponent } from 'abs-component';
 
+enum ControlCharacter {
+  OFF = '-',
+  ON = '+',
+}
+
+enum Binary {
+  ZERO = '0',
+  ONE = '1',
+}
+
 export class Binco implements AbsComponent {
   constructor(public readonly node: HTMLElement) {
     this.textInputNode = this.node.getNode('[js-text]') as HTMLInputElement;
@@ -43,7 +53,7 @@ export class Binco implements AbsComponent {
               res += counter;
             }
             if(i != binaryString.length) {
-              res += binaryString[i] === '0' ? '-' : '+';
+              res += binaryString[i] === Binary.ZERO ? ControlCharacter.OFF : ControlCharacter.ON;
               counter = 1;
             }
           } else {
@@ -58,7 +68,7 @@ export class Binco implements AbsComponent {
 
         return res;
       } else {
-        let res = binaryString[0] === '0' ? '-' : '+';
+        let res: string = binaryString[0] === Binary.ZERO ? ControlCharacter.OFF : ControlCharacter.ON;
         let counter = 1;
         for(let i = 1; i <= binaryString.length; i++) {
           if(binaryString[i] === binaryString[i-1]) {
@@ -78,12 +88,19 @@ export class Binco implements AbsComponent {
       return '';
     } else {
       let res = '';
-      let currentDigit = bincoString[0] === '-' ? '0' : '1';
-      for(let i = 1; i <= bincoString.length - 1; i++) {
-        for(let j = parseInt(bincoString[i]); j > 0; j--) {
-          res += currentDigit;
+      let currentDigit = '0';
+      for(let i = 0; i <= bincoString.length - 1; i++) {
+        const currentCharacter = bincoString[i];
+
+        const isCurrentCharacterControl = Object.values(ControlCharacter).includes(currentCharacter as ControlCharacter);
+        if(isCurrentCharacterControl) {
+          currentDigit = currentCharacter === ControlCharacter.OFF ? Binary.ZERO : Binary.ONE;
+        } else {
+          for(let j = parseInt(currentCharacter); j > 0; j--) {
+            res += currentDigit;
+          }
+          currentDigit = currentDigit === Binary.ZERO ? Binary.ONE : Binary.ZERO;
         }
-        currentDigit = currentDigit === '0' ? '1' : '0';
       }
       return res;
     }
@@ -106,18 +123,17 @@ export class Binco implements AbsComponent {
     return res;
   }
 
-  private encode(value: string): string {
-    let res = '';
-    const segment = parseInt(this.segmentInputNode.value) || 1;
+  private encode(value: string, segment: number): string {
     const binary: string = this.textToBinary(value);
-    if(binary === this.UNSUPPORTED_CHARACTER_ERROR) {
-      res = this.UNSUPPORTED_CHARACTER_ERROR;  
-    } else {
-      res = this.binaryCounter(binary, segment);
-    }
+    const res = binary === this.UNSUPPORTED_CHARACTER_ERROR ?
+      this.UNSUPPORTED_CHARACTER_ERROR :
+      this.binaryCounter(binary, segment);
     return res;
   }
 
+  /**
+   * Doesn't need `segment` parameter because `binaryToText` algorithm manages segmentation dynamically
+   */
   private decode(value: string): string {
     const binaryString: string = this.bincoCounter(value);
     const binaryArray: Array<string> = this.splitBinaryStringByBytes(binaryString);
@@ -133,13 +149,11 @@ export class Binco implements AbsComponent {
 
   private setEvents() {
     this.encodeButtonNode.on('click' as keyof ElementEventMap, () => {
-      //this.codeInputNode.value = '';
-      const res = this.encode(this.textInputNode.value);
+      const res = this.encode(this.textInputNode.value, this.segmentInputNode.valueAsNumber || 1);
       this.codeInputNode.value = res;
     });
     
     this.decodeButtonNode.on('click' as keyof ElementEventMap, () => {
-      //this.textInputNode.value = '';
       const res = this.decode(this.codeInputNode.value);
       this.textInputNode.value = res;
     });
