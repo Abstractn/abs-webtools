@@ -1,7 +1,5 @@
 // src:https://codepen.io/robdongas/pen/XmJbYE
 $breakpoints: (
-  'mob': ( max-width: 767px ), //TODO delete after checking code
-  
   'mob-down': ( max-width: 576px ),
   'mob-up':   ( min-width: 767px ),
   'tab-down': ( max-width: 768px ),
