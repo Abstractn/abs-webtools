@@ -27,14 +27,16 @@ export class AniCalc implements AbsComponent {
   private readonly endDateInputNode: HTMLInputElement;
   private readonly calculateButtonNode: HTMLButtonElement;
 
-  private calculate(startDate: Dayjs.Dayjs, duration: number): AniCalcResult | null {
+  private calculate(startDate: Dayjs.Dayjs, duration: number, watchFrequency: number): AniCalcResult | null {
     const isValid = (
       startDate.toString() != 'Invalid Date' &&
-      duration > 0
+      duration > 0 &&
+      watchFrequency > 0
     );
-    if (isValid) {
+    if(isValid) {
       const endDate = Dayjs(startDate).add(duration - 1, 'week');
-      const watchDate = endDate.subtract(duration - 1, 'day');
+      const daysNeededToWatch = Math.ceil(duration / watchFrequency) - 1;
+      const watchDate = endDate.subtract(daysNeededToWatch, 'day');
       return {
         endDate: endDate,
         watchDate: watchDate,
@@ -47,8 +49,9 @@ export class AniCalc implements AbsComponent {
   private setEvents() {
     this.calculateButtonNode.on('click' as keyof ElementEventMap, () => {
       const startDate = Dayjs(this.startDateInputNode.value);
-      const duration = parseInt(this.durationInputNode.value);
-      const res = this.calculate(startDate, duration);
+      const duration = this.durationInputNode.valueAsNumber;
+      const watchFrequency = this.watchFrequencyInputNode.valueAsNumber || 1;
+      const res = this.calculate(startDate, duration, watchFrequency);
       if(res) {
         //this.watchDateInputNode.value = res.watchDate.locale(navigator.language).format('MMMM DD');
         //this.endDateInputNode.value = res.endDate.locale(navigator.language).format('MMMM DD');

@@ -15,16 +15,16 @@
     {{> components/atoms/input-number/input-number.atom
       label="release frequency (days)"
       disabled="true"
-      inputAttributes="js-release-frequency disabled"
+      inputAttributes="js-release-frequency"
       initialValue="7"
       controls="true"
     }}
     {{> components/atoms/input-number/input-number.atom
       label="watch frequency (per day)"
-      disabled="true"
-      inputAttributes="js-watch-frequency disabled"
+      inputAttributes="js-watch-frequency"
       initialValue="1"
       controls="true"
+      min=1
     }}
   </div>
 
