@@ -3,10 +3,10 @@ import { randomInt } from 'abs-utilities';
 
 export class RandomInt implements AbsComponent {
   constructor(public readonly node: HTMLElement) {
-    this.minValueInputNode = this.node.querySelector('[js-min]') as HTMLInputElement;
-    this.maxValueInputNode = this.node.querySelector('[js-max]') as HTMLInputElement;
-    this.generateButtonNode = this.node.querySelector('[js-generate]') as HTMLButtonElement;
-    this.outputInputNode = this.node.querySelector('[js-generate-output]') as HTMLInputElement;
+    this.minValueInputNode = this.node.getNode('[js-min]') as HTMLInputElement;
+    this.maxValueInputNode = this.node.getNode('[js-max]') as HTMLInputElement;
+    this.generateButtonNode = this.node.getNode('[js-generate]') as HTMLButtonElement;
+    this.outputInputNode = this.node.getNode('[js-generate-output]') as HTMLInputElement;
   }
   
   private readonly minValueInputNode: HTMLInputElement;

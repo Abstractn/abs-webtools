@@ -3,14 +3,14 @@ import { proportionalRange } from 'abs-utilities';
 
 export class ProportionalRange implements AbsComponent {
   constructor(public readonly node: HTMLElement) {
-    this.oldMinValueInputNode = this.node.querySelector('[js-old-min]') as HTMLInputElement;
-    this.oldMaxValueInputNode = this.node.querySelector('[js-old-max]') as HTMLInputElement;
-    this.newMinValueInputNode = this.node.querySelector('[js-new-min]') as HTMLInputElement;
-    this.newMaxValueInputNode = this.node.querySelector('[js-new-max]') as HTMLInputElement;
-    this.valueInputNode = this.node.querySelector('[js-value]') as HTMLInputElement;
-    this.generateButtonNode = this.node.querySelector('[js-calculate]') as HTMLButtonElement;
-    this.outputInputNode = this.node.querySelector('[js-calculation-output]') as HTMLInputElement;
-    this.formulaButtonNode = this.node.querySelector('[js-get-formula]') as HTMLButtonElement;
+    this.oldMinValueInputNode = this.node.getNode('[js-old-min]') as HTMLInputElement;
+    this.oldMaxValueInputNode = this.node.getNode('[js-old-max]') as HTMLInputElement;
+    this.newMinValueInputNode = this.node.getNode('[js-new-min]') as HTMLInputElement;
+    this.newMaxValueInputNode = this.node.getNode('[js-new-max]') as HTMLInputElement;
+    this.valueInputNode = this.node.getNode('[js-value]') as HTMLInputElement;
+    this.generateButtonNode = this.node.getNode('[js-calculate]') as HTMLButtonElement;
+    this.outputInputNode = this.node.getNode('[js-calculation-output]') as HTMLInputElement;
+    this.formulaButtonNode = this.node.getNode('[js-get-formula]') as HTMLButtonElement;
   }
   
   private readonly oldMinValueInputNode: HTMLInputElement;
