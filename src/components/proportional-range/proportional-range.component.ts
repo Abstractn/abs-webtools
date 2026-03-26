@@ -21,7 +21,7 @@ export class ProportionalRange implements AbsComponent {
   private readonly generateButtonNode: HTMLButtonElement;
   private readonly outputInputNode: HTMLInputElement;
   private readonly formulaButtonNode: HTMLButtonElement;
-  private readonly FORMULA_STRING = 'newValue = ((value - oldMin) / (oldMax - oldMin)) * (newMax - newMin) + newMin';
+  private readonly FORMULA_STRING = '((newMax - newMin) / (oldMax - oldMin)) * (value - oldMin) + newMin';
 
   private setCalculateButtonEvent(): void {
     this.generateButtonNode.on('click' as keyof ElementEventMap, (event) => {
