@@ -32,8 +32,12 @@
     attributes="js-calculate"
   }}
 
-  {{> components/atoms/input-text/input-text.atom
-    label="new value"
-    inputAttributes="js-calculation-output readonly"
-  }}
+  <div class="output-wrapper">
+    {{> components/atoms/input-text/input-text.atom
+      label="new value"
+      inputAttributes="js-calculation-output readonly"
+    }}
+
+    <button type="button" class="formula-button" title="Formula" js-get-formula>?</button>
+  </div>
 </view>

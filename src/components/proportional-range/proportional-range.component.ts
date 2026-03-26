@@ -10,6 +10,7 @@ export class ProportionalRange implements AbsComponent {
     this.valueInputNode = this.node.querySelector('[js-value]') as HTMLInputElement;
     this.generateButtonNode = this.node.querySelector('[js-calculate]') as HTMLButtonElement;
     this.outputInputNode = this.node.querySelector('[js-calculation-output]') as HTMLInputElement;
+    this.formulaButtonNode = this.node.querySelector('[js-get-formula]') as HTMLButtonElement;
   }
   
   private readonly oldMinValueInputNode: HTMLInputElement;
@@ -19,6 +20,8 @@ export class ProportionalRange implements AbsComponent {
   private readonly valueInputNode: HTMLInputElement;
   private readonly generateButtonNode: HTMLButtonElement;
   private readonly outputInputNode: HTMLInputElement;
+  private readonly formulaButtonNode: HTMLButtonElement;
+  private readonly FORMULA_STRING = 'newValue = ((value - oldMin) / (oldMax - oldMin)) * (newMax - newMin) + newMin';
 
   private setCalculateButtonEvent(): void {
     this.generateButtonNode.on('click' as keyof ElementEventMap, (event) => {
@@ -45,10 +48,18 @@ export class ProportionalRange implements AbsComponent {
     });
   }
 
+  private setFormulaButtonEvent(): void {
+    this.formulaButtonNode.on('click', (event) => {
+      alert('formula copied to clipboard');
+      navigator.clipboard.writeText(this.FORMULA_STRING);
+    });
+  }
+
   init() {}
 
   ready() {
     this.setCalculateButtonEvent();
+    this.setFormulaButtonEvent();
     this.setCopyInputEvent();
   }
 }

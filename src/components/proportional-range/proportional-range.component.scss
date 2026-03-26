@@ -9,4 +9,23 @@
     flex-direction: column;
     gap: 32px;
   }
+
+  .output-wrapper {
+    position: relative;
+  }
+
+  .formula-button {
+    position: absolute;
+    top: calc( 50% + 9px );
+    right: 0;
+    transform: translateY(-50%);
+    color: white;
+    font-size: 0.8rem;
+    background-color: transparent;
+    padding: 10px;
+    border: none;
+    margin: 0;
+    opacity: .6;
+    cursor: pointer;
+  }
 }
